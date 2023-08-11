@@ -1,0 +1,129 @@
+System.out.println("Hello World!!!");
+
+Functional Interface - Jdk 8
+
+@FunctionalInterface
+interface Inf1
+{
+	void get();
+	default void put(){}
+}
+
+
+
+Lambda Expression - Functional Interfaces
+
+java.util.function- 49 Functional Interfaces(jdk 8)
+
+Supplier<Integer>	-T get()
+	IntSupplier
+Consumer<T>		-void accept(T a)	
+	IntConsumer
+	BiConsumer<T,U>	-void accept(T a1,U a2)
+Predicate<T>		- boolean test(T t1)
+	BiPredicate
+	IntPredicate
+Function<T,R>		- R apply(T t1)
+	BiFunction<T,U,R> 
+
+
+java B 12 23 34 45 56 
+
+BufferedReader
+---------------
+InputStream ins=System.in;
+InputStreamReader
+BufferedReader
+
+
+
+InputStream ins=System.in;
+InputStreamReader inr=new InputStreamReader(ins);
+BufferedReader br=new BufferedReader(inr);
+-------------------------------------------------
+BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+String str=br.readLine();
+
+ObjectInputStream
+ObjectOutputStream
+
+
+
+Collections
+-----------
+- Dynamic Collection 
+- No size to be given in advance
+- Add and delete Objects easily
+- No fixed size
+- Classes for different Data Structures
+
+Stream API
+----------- 
+java.util.stream
+
+Terminal - count,allMatch,anyMatch
+Intermediate - sorted,filter,map,distinct,limit
+
+JAR File- Java Archieve File
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
