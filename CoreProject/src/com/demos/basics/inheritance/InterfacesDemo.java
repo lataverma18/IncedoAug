@@ -11,7 +11,7 @@ class Inf1Impl1 implements Inf1
 
 	@Override
 	public void get() {
-		System.out.println("get of Imf1Impl1");
+		System.err.println("get of Imf1Impl1");
 	}
 	@Override
 	public void put() {
