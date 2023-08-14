@@ -1,0 +1,88 @@
+Hibernate Query Language (HQL)
+- Object Oriented
+
+("from Employee")
+
+
+Spring Framework
+-----------------
+- Framework of Frameworks
+- Easy Integration with Other framework
+- Convention Over Configuration
+- Ease to the developers to write the code
+- Loosely Coupled Application
+- Dependency Injection
+- IOC - Inversion of Control
+
+
+class A
+{
+	void get(B b1)				//Dependency is Injected
+	{
+		//B b1=new B();			//Dependency is Created 
+		int i=b1.put();
+		s.o.p(i+10);
+	}
+}
+class B
+{
+	B(int i,float f, char ch){}
+	int put()
+	{
+	}
+}
+
+Framework/Factory/BeanFactory/ Spring Context /IOC Container
+
+Dependency Injection
+---------------------
+1. Setter Injection
+2. Constructor Injection
+3. Object Injection
+
+Autowiring
+------------
+
+Scopes
+------
+Singleton
+Prototype
+
+Life Cycle
+-----------
+
+Initializing Bean
+DisposableBean
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
