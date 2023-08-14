@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+   <bean id="emp1" class="demo.springcore.beans.Employee" autowire="constructor" scope="prototype" init-method="myInit" destroy-method="myDestroy">
+   <!-- 	<property name="empId" value="101"></property>
+   	<property name="empName" value="Ronit"></property>
+   	<property name="empSalary" value="45000"></property> -->
+   	
+   	<constructor-arg value="Ronit"  index="1"></constructor-arg>
+   	<constructor-arg value="101" index="0"></constructor-arg>
+   	<constructor-arg value="45000" index="2"></constructor-arg>
+   	
+   <!-- 	<property name="empAddress" ref="add1"></property> -->
+   </bean>
+
+<bean id="empAddress" class="demo.springcore.beans.Address">
+	<property name="address" value="E-367/45"></property>
+	<property name="city" value="Gurugram"></property>
+	<property name="state" value="Haryana"></property>
+	<property name="zipcode" value="122005"></property>
+</bean>
+<bean id="add1" class="demo.springcore.beans.Address">
+	<property name="address" value="B-367/45"></property>
+	<property name="city" value="Delhi"></property>
+	<property name="state" value="Delhi/NCR"></property>
+	<property name="zipcode" value="11005"></property>
+</bean>
+<bean class="demo.springcore.beans.MyBeanPostProcessor"></bean>
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"> <!-- bean definitions here -->
+
+<context:annotation-config></context:annotation-config>
+<context:component-scan base-package="demo.springcore.beans"></context:component-scan>
+
+
+
+
+</beans>
