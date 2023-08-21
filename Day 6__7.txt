@@ -1,0 +1,91 @@
+url ://
+
+
+Http Post
+------------
+request
+Request Header
+Request Body- txt1=value&txt2=value2
+
+
+Web Service
+---------------
+SOAP- SOAP - XML Based
+REST - representational State Transfer protocol
+- HTTP Protocol
+Terminologies
+-----------------
+
+- Available as URL - Endpoints
+- Collection of REST Endpoints- REST API - Parent Path 
+- About which you are performing operns through End points - resource
+- A Variable written in {} with the path - Path Variable
+
+
+
+@PostMapping()		post    - Insertion		- C		- /trainees	
+@GetMapping()		get	- Reading 		- R		- /trainees
+									- /trainees/{id}		-trainees/101
+									- /trainees/byName/{name}	-trainees/byName/Lata
+@PutMapping()		put	- Updation		- U		- /trainees
+@DeleteMapping()	delete  - Deletion		- D		- /trainees/{id}
+									- /trainees/byName/{name}
+	
+
+@RequestMapping(path="",method=)
+
+REST API
+---------
+- Spring Framework
+- EasyRest - Jersey
+
+Spring Data JPA
+----------------
+- Implementation of Repository ia already Provided
+- Repository Interfaces
+
+	Repository
+	|
+	CrudRepository
+	|
+	PaginationAndSortingRepository
+	|
+	JpaRepository
+
+
+ResponseEntity - ResponseData+ HttpStatus
+
+
+Exception Handling in REST API
+---------------------------------
+1. Controller Level Exception Handling
+2. Global Exception Handling
+
+Content Negotiation
+--------------------
+
+
+<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
