@@ -1,0 +1,169 @@
+Application Name is to be given
+spring.application.name=product-ms
+
+Eureka Server 
+- Add Depenedency 
+- On Main Class @EnableEurekaServer
+- Write Configuration on application.properties file
+	server.port=8761
+	eureka.client.register-with-eureka=false
+	eureka.client.fetch-registry=false
+
+
+Eureka Client
+- Add Depenedency 
+- On Main Class @EnableDiscoveryClient
+- Write Configuration on application.properties file
+	server.port=8085
+	spring.application.name=product-service
+	eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka
+
+FeignClient
+- Add Dependency
+- On Main Class @EnableFeignClients
+- FeignClient Interface
+	-@FeignClient(name = "employees", url = "http://localhost:8086")
+	public interface FeignClientInf {
+	@GetMapping("/status")
+	public String getStatusValue();
+	@GetMapping("/email")
+	public String getEmailValue();
+	@GetMapping("/phone")
+	public String getPhoneValue();
+	}
+- Create Feign Client Controller
+	@RestController
+	public class FeignClientController {
+	@Autowired
+	FeignClientInf feignClientInf;
+	
+	@GetMapping("/fetchStatus")
+	public String gettingStatus()
+	{
+	return feignClientInf.getStatusValue();	
+	}
+	@GetMapping("/fetchEmail")
+	public String gettingEmail()
+	{
+	return feignClientInf.getEmailValue();	
+	}
+	@GetMapping("/fetchPhone")
+	public String gettingPhone()
+	{
+	return feignClientInf.getPhoneValue();	
+	}
+
+	}
+
+Zuul Api Gateway
+-------------------
+- Add Dependency
+	<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-zuul</artifactId>
+			<version>2.2.0.RELEASE</version>
+	</dependency>
+- Change Spring Boot Version
+	<version>2.3.7.RELEASE</version>
+
+- Add Annotation Above Main Class - @EnableZuulProxy
+
+
+- Create ZuulFilter
+	package com.example.security;
+	import org.springframework.stereotype.Component;
+	import com.netflix.zuul.ZuulFilter;
+	import com.netflix.zuul.context.RequestContext;
+	import com.netflix.zuul.exception.ZuulException;
+	@Component
+	public class MyZuulFilter extends ZuulFilter {
+
+	@Override
+	public boolean shouldFilter() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public Object run() throws ZuulException {
+		RequestContext ctx = RequestContext.getCurrentContext();
+		ctx.addZuulRequestHeader("Test", "TestSample");
+		return null;
+	}
+
+	@Override
+	public String filterType() {
+		// TODO Auto-generated method stub
+		return "Pre";
+	}
+
+	@Override
+	public int filterOrder() {
+		// TODO Auto-generated method stub
+		return 1;
+	}
+
+	}
+
+- In Application.properties
+	server.port=8085
+	zuul.routes.zuul-client.url=http://localhost:8086		//For this url is: http://localhost:8086/zuul-client/
+	zuul.routes.zuul-client.path=/zc/**				//For this url is: http://localhost:8086/zu/
+
+
+
+Circuit Breaker Pattern Hystrix 
+----------------------------------
+- Add Dependency
+	<dependency>
+	    <groupId>org.springframework.cloud</groupId>
+	    <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+	    <version>2.2.8.RELEASE</version>
+	</dependency>
+- Change Spring Boot Version at 2+
+- Add Annotation above Main Class
+	@EnableCircuitBreaker
+- Add Fallback to Controller
+	@RestController
+	@RequestMapping("/infos")
+	public class MovieInfoController {
+	@Autowired
+	RestTemplate rtemp;
+	
+	@GetMapping("/{id}")
+	@HystrixCommand(fallbackMethod ="getMovieInfoFallBack" )
+	public MovieInfo getMovieInfo(@PathVariable("id") String id)
+	{
+		Movie m=rtemp.getForObject("http://movie-catalog-service/catalogs/"+id,Movie.class);
+		Rating r=rtemp.getForObject("http://movie-rating-service/ratings/"+id,Rating.class);
+		return new MovieInfo(id,m.getMovieName(),r.getRating());
+		
+	}
+	public MovieInfo getMovieInfoFallBack(@PathVariable("id") String id)
+	{
+		return new MovieInfo(id,null,0); 
+	}
+	}
+
+
+OAuth 
+------
+- Add Dependency
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-oauth2-client</artifactId>
+	</dependency>
+- Add Annotation Above Main Class
+	@SpringBootApplication
+- Generate client Id and Client Secret
+	- On Github - Developers Setting
+- application.properties
+	server.port=8085
+
+	#GitHub
+	spring.security.oauth2.client.registration.github.client-id=009d7321e9f0d263c1ff
+	spring.security.oauth2.client.registration.github.client-secret=0e36260aa0fb30228186aa792246b8da230ce75d
+
+
+
+
